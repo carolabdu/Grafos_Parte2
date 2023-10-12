@@ -1,3 +1,5 @@
+from TP1 import *
+
 def infos_grafo(arq, representacao, bfs=False, dfs=False, dist=False, diameter=False, cc=False):   #Função para obter as informações do grafo escolhido
     with open(f'{arq}.txt', 'r') as arquivo:
         texto = [int(vertice) for vertice in arquivo.read().split() if vertice.isdigit()] #Cria uma lista com o conteúdo presente no arquivo de teste
