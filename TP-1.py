@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from stack import *
 from queue import *
 
