@@ -4,7 +4,7 @@ from queue import *
 
 class Graph_l: #Classe de grafos seguindo a representação de lista de adjacência
     def __init__(self, v, a): #(número de vértices, número de arestas)
-        self.aqruivo_saida = [] #Lista que vai receber os resultados desejados
+        self.arquivo_saida = [] #Lista que vai receber os resultados desejados
         self.v = v
         self.a = np.array(a)
         self.num_arestas = len(self.a) 
