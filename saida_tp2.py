@@ -6,7 +6,7 @@ def infos_grafo(arq, representacao, bfs=False, dfs=False, dist=False, diameter=F
         vertices = texto[0] #Pega o primeiro elemento da lista acima, que correnspode ao número de vértices do grafo
         arestas = [] #Lista vazia que vai conter todos os pares de arestas do grafo
         for i in range(1,len(texto[1:]), 3):
-            arestas += [texto[i:i+3]] #Atualiza a lista de arestas, criando sublistas com os pares de arestas
+           arestas += [[int(texto[3*i+1])]+[int(texto[3*i+2])]+ [float(texto[3*i+3])]] #Atualiza a lista de arestas, criando sublistas com os pares de arestas
 
     
     if representacao=='L':
