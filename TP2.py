@@ -111,6 +111,18 @@ class Graph_l:
                 self.arquivo_saida.append(f'\nDijkstra: {d})
         return d    
 
+    def caminho(self,v1,v2,p): #v1 é o vértice de partida, v2 o de chegada e p é para imprimir 
+        pais = self.Dijkstra(v2, 0)[1]  #fazemos a árvore a partir de v2, para ir encontrando os pais de v1 até chegar em v2
+        caminho = [v1] #caminho começa já com o vétice de partida
+        v= v1  #começamos em v1
+        while v != v2: #enquanto vértice analisado não for vértice destino 
+            v = pais [v-1]  #próximo vértice do caminho é o pai do que último adicionado 
+            caminho.append(v)   #adicionamos esse pai ao caminho
+        if p==1:
+            self.arquivo_saida.append(f'\nCaminho entre  {v1} e {v2}: {caminho} ')
+        return caminho 
+    
+
 class Graph_m: #grafo em matriz 
     def __init__(self, v, a):
         self.arquivo_saida = []
