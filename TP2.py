@@ -115,9 +115,12 @@ class Graph_l:
         pais = self.Dijkstra(v2, 0)[1]  #fazemos a árvore a partir de v2, para ir encontrando os pais de v1 até chegar em v2
         caminho = [v1] #caminho começa já com o vétice de partida
         v= v1  #começamos em v1
-        while v != v2: #enquanto vértice analisado não for vértice destino 
-            v = pais [v-1]  #próximo vértice do caminho é o pai do que último adicionado 
-            caminho.append(v)   #adicionamos esse pai ao caminho
+        if self.Dijkstra(v2, 0)[2][v1-1] == -1: 
+            caminho = "Não há caminho, v2 e v1 não estão na mesma cc"
+        else:
+            while v != v2: #enquanto vértice analisado não for vértice destino 
+                v = pais [v-1]  #próximo vértice do caminho é o pai do que último adicionado  
+                caminho.append(v)   #adicionamos esse pai ao caminho
         if p==1:
             self.arquivo_saida.append(f'\nCaminho entre  {v1} e {v2}: {caminho} ')
         return caminho 
