@@ -164,11 +164,22 @@ class Graph_l: #Classe de grafos seguindo a representação de lista de adjacên
         return cc   
 
     def Dijkstra(self,vi, p):
+        dist = np.full(self.v, np.inf)
         if self.neg == True: 
             d = 'Não é possível'
-        else:
-            #faz dijkstra
-            #d = [distancias]
+        else:  
+            #Definir S como vazio
+            #Para cada vértice v
+                #dist[v] = infinito
+                #Define conjunto S = 0 // inicia vazio
+                #dist[s] = 0
+                #Enquanto S != V
+                    #Selecione u em V-S, tal que dist[u] é mínima
+                    #Adicione u em S
+                    #Para cada vizinho v de u faça
+                    #Se dist[v] > dist[u] + w(u,v) então
+                        #dist[v] = dist[u] + w(u,v)
+            #Retorna dist[]
         if p ==1: 
             self.arquivo_saida.append(f'\nDijkstra: {d})
             
