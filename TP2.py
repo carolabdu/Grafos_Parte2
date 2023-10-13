@@ -161,6 +161,16 @@ class Graph_l: #Classe de grafos seguindo a representação de lista de adjacên
             self.arquivo_saida.append(f'\nNúmero de componentes conexas no grafo: {len(fim)}\nMaior componente conexa: {np.max(fim)}\nMenor componente conexa: {np.min(fim)}')
         return cc   
 
+    def Dijkstra(self,vi, p):
+        if self.neg == True: 
+            d = 'Não é possível'
+        else:
+            #faz dijkstra
+            #d = [distancias]
+        if p ==1: 
+            self.arquivo_saida.append(f'\nDijkstra: {d})
+            
+
 class Graph_m: #grafo em matriz 
     def __init__(self, v, a):
         self.arquivo_saida = []
