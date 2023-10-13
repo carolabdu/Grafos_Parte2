@@ -70,8 +70,7 @@ class Graph_l:
         return int(mediano)
 
     def distancia(self, v1, v2, p): #Retorna a distâncoa entre dois vértices
-        self.Dijkstra(v1, 0)
-        D = dist[v2-1]
+        D= self.Dijkstra(v1, 0)[v2-1]
         if p==1:
             self.arquivo_saida.append(f'\nDistância entre {v1} e {v2}: {D}')
         return D
