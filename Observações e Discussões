@@ -1,0 +1,9 @@
+ 
+2. Distâncias com pesos negativos 
+     Apenas retornar que não é possível
+3. Distância = Djkstra???
+      Sim, já testada 
+4. Tem que usar as duas formas de representação??
+      Pode usar apenas uma forma de representação
+
+5. Para calcular a distância de forma mais eficiente, podemos verificar se o grafo é esparso e escolher se usaremos Dijkstra com ou sem heap. 
