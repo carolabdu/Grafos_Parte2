@@ -2,7 +2,7 @@
 2. Distâncias com pesos negativos 
      Apenas retornar que não é possível
 3. Distância = Djkstra???
-      Sim, já testada 
+      Sim, já testada  e caminho já testado tb (:
 4. Tem que usar as duas formas de representação??
       Pode usar apenas uma forma de representação
 
