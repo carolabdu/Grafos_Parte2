@@ -9,12 +9,14 @@ class Graph_l: #Classe de grafos seguindo a representação de lista de adjacên
         self.v = v
         self.a = np.array(a)
         self.num_arestas = len(self.a) 
+        self.neg = False
         self.lista = [[] for i in range(self.v)] #Não sabemos quantos elementos tem em cada linha (quantos vizinhos cada vértice tem)
         g = np.zeros(self.v,dtype=int) #Vetor de zeros, onde vamos guardar o grau de cada vértice
         for i in range(self.num_arestas):
             u=self.a[i][0] #Pega o primeiro vértice do par de arestas
             v= self.a[i][1] #Pega o segundo vértice do par de arestas
             p= self.a[i][2] #Pega o peso da aresta
+            if p < 0: self.neg == True
             self.lista[u-1].append(np.array(v, p)) #Adiciona o vértice v na linha u (o índice é u-1, pois i se inicia no 0)
             self.lista[v-1].append(np.array(u, p)) #Adiciona o vértice u na linha v
             g [u-1] += 1  #Atualiza os graus 
