@@ -3,11 +3,12 @@ import random
 from stack import *
 from queue import *
 
-class Graph_l: #Classe de grafos seguindo a representação de lista de adjacência
+
+class Graph_l:
     def __init__(self, v, a): #(número de vértices, arestas)
         self.aqruivo_saida = [] #Lista que vai receber os resultados desejados
         self.v = v
-        self.a = np.array(a)
+        self.a = a
         self.num_arestas = len(self.a) 
         self.neg = False
         self.lista = [[] for i in range(self.v)] #Não sabemos quantos elementos tem em cada linha (quantos vizinhos cada vértice tem)
@@ -16,9 +17,10 @@ class Graph_l: #Classe de grafos seguindo a representação de lista de adjacên
             u=self.a[i][0] #Pega o primeiro vértice do par de arestas
             v= self.a[i][1] #Pega o segundo vértice do par de arestas
             p= self.a[i][2] #Pega o peso da aresta
+            print(u,v)
             if p < 0: self.neg == True
-            self.lista[u-1].append(np.array(v, p)) #Adiciona o vértice v na linha u (o índice é u-1, pois i se inicia no 0)
-            self.lista[v-1].append(np.array(u, p)) #Adiciona o vértice u na linha v
+            self.lista[u-1]+= [(v,p)] #Adiciona o vértice v na linha u (o índice é u-1, pois i se inicia no 0)
+            self.lista[v-1]+= [(u, p)] #Adiciona o vértice u na linha v
             g [u-1] += 1  #Atualiza os graus 
             g [v-1] += 1
         self.graus = g
@@ -168,12 +170,11 @@ class Graph_l: #Classe de grafos seguindo a representação de lista de adjacên
         if self.neg == True: 
             d = 'Não é possível'
         else:  
-            #Definir S como vazio
-            #Para cada vértice v
-                #dist[v] = infinito
-                #Define conjunto S = 0 // inicia vazio
-                #dist[s] = 0
-                #Enquanto S != V
+            S = [] #Definir S como vazio
+            len_S = 0 #variável auxiliar para não ter que verificar a cada iteração a lista S
+            dist = np.full(self.v, np.inf) #distâncias começam infinitas
+            dist[vi] = 0
+            while len_S != self.v : #Enquanto S != V
                     #Selecione u em V-S, tal que dist[u] é mínima
                     #Adicione u em S
                     #Para cada vizinho v de u faça
