@@ -108,7 +108,7 @@ class Graph_l:
                             nivel[v-1] = nivel[u] + 1
             d = [dist, pai, nivel] 
             if p ==1: 
-                self.arquivo_saida.append(f'\nDijkstra: {d})
+                self.arquivo_saida.append(f'\nDijkstra a partir de {v1} : {d[0]}, árvore (pais): {d[1]}, árvore(níveis): {d[2]} ')
         return d    
 
     def caminho(self,v1,v2,p): #v1 é o vértice de partida, v2 o de chegada e p é para imprimir 
