@@ -69,65 +69,12 @@ class Graph_l:
             self.arquivo_saida.append(f'\nMediana dos graus: {mediano}')
         return int(mediano)
 
-
-    def DFS(self,vi,p): #Implementação da busca em profundidade
-        self.marcados = np.zeros(self.v,dtype=int) #inicia vetor de marcação
-        self.s = Stack() #cria pilha vazia
-        self.s.push(vi)  #adiciona a raiz na fila
-        pai = np.array([-1] * self.v, dtype = int) #inicia vetor com os pais
-        nivel = np.array([-1] * self.v, dtype = int)#inicia vetor dos níveis
-        pai[vi-1] = 0 #indica que não tem pai pois é raiz
-        nivel[vi -1]= 0 #nivel da raiz é zero 
-        while self.s.isEmpty()==False : #enquanto pilha não estiver vazia 
-            u = self.s.peek() #pega vértice no topo da lista
-            self.s.pop() #remover u da pilha 
-            if self.marcados[u-1]==0: # (implemetar para ver se tá na lista): 
-                self.marcados[u-1]=1 #adicionar vétice aos marcados
-                for k in self.lista[u-1]: #para cada vizinho de u 
-                    self.s.push(k)  #botar na fila 
-                    if self.marcados[k-1]==0:  #se k ainda não foi marcado
-                        pai[k-1] = u   #escreve que u descobriu (vai mudando ao longo do algoritmo)
-                        nivel[k-1] = nivel[u-1] + 1  #verifica o nível do pai de k e soma 1
-        
-        self.DFStree = [pai, nivel]
-        if p==1:
-            self.arquivo_saida.append(f'\nBusca DFS:\nPais: {pai}\nNíveis: {nivel}')
-        return (self.DFStree)  
-
-    def BFS(self,vi,p): #Implementação da busca em largura
-        self.marcados = np.zeros(self.v,dtype=int) #Lista com os nós que já foram explorados
-        self.Q = Queue() #Cria uma fila vazia
-        pai = np.array([-1] * self.v, dtype = int) #inicia vetor com os pais
-        nivel = np.array([-1] * self.v, dtype = int) #inicia vetor dos níveis
-        nivel[vi -1] = 0
-        self.marcados[vi-1]=1#Marca vi, que é o nó em que começamos a busca
-        self.Q.add(vi) #Adciona o nó na fila
-        pai[vi-1] = 0 #Indica que é raiz 
-        while self.Q.is_empty() == False: #A busca continua até a lista ficar vazia(Até todos os vértices serem explorados)
-            v = self.Q.pop() #Remove o último vértice da fila, que corresponde ao vértice mais antigo
-            for w in self.lista[v-1]: #Visita os vizinhos de v
-                if self.marcados[w-1]==0: 
-                    pai[w-1]= v #Se w não tiver sido marcado, o vértice que o descobriu(seu pai) foi v
-                    nivel[w-1] = nivel[v-1]+1 #Muda o nível atual para o nível de w
-                    self.marcados[w-1]=1 #Marca w se não foi descoberto ainda
-                    self.Q.add(w) #Adiciona w na primeira poição da fila
-
-        self.maxlevel = np.max(nivel) #Pega o nível máximo
-
-        self.BFStree = [pai, nivel, self.maxlevel] 
-        if p==1:
-            self.arquivo_saida.append(f'\nBusca BFS:\nPais: {pai}\nNíveis: {nivel}')
-        return (self.BFStree)
-
     def distancia(self, v1, v2, p): #Retorna a distâncoa entre dois vértices
-        self.BFS(v1) #Roda a BFS para o primeiro vértice
-        if self.BFStree[0][v2 -1] == -1: #Checa se o segundo vértice está conectado ao primeiro(caso ele tenha um pai na BFStree, então os dois são conectados)
-            distancia = 'infinita' #Ou seja vértices não estão conectadas
-        else: 
-            distancia = self.BFStree[1][v2-1] #O nível será a distância entre os vértices
+        self.Dijkstra(v1, 0)
+        D = dist[v2-1]
         if p==1:
-            self.arquivo_saida.append(f'\nDistância entre {v1} e {v2}: {distancia}')
-        return distancia
+            self.arquivo_saida.append(f'\nDistância entre {v1} e {v2}: {D}')
+        return D
 
     def diameter(self,p=0):  #Retorna o diãmetro do grafo
         if self.v < 1000: #Para otimizar o código, escolhemos 1000 vértices aleatórios de cada grafo para aproximar o diâmetro
@@ -181,6 +128,8 @@ class Graph_l:
             while len_S != self.v : #Enquanto S != V
                 p_u = np.min(dist_aux) #Selecione u em V-S, tal que dist[u] é mínima
                 u = np.argmin(dist_aux) #u que tem a distância mínima
+                if p_u == np.inf :   #grafo não é conexo
+                    break
                 S[u]= 1 #Adicione u em S
                 len_S += 1 
                 dist[u]=dist_aux[u]
