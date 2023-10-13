@@ -70,60 +70,26 @@ class Graph_l:
         return int(mediano)
 
     def distancia(self, v1, v2, p): #Retorna a distâncoa entre dois vértices
-        D= self.Dijkstra(v1, 0)[v2-1]
+        D= self.Dijkstra(v1, 0)[0][v2-1]
         if p==1:
             self.arquivo_saida.append(f'\nDistância entre {v1} e {v2}: {D}')
         return D
 
-    def diameter(self,p=0):  #Retorna o diãmetro do grafo
-        if self.v < 1000: #Para otimizar o código, escolhemos 1000 vértices aleatórios de cada grafo para aproximar o diâmetro
-            diameter = 0
-            for i in range(1,self.v):
-                self.BFS(i) #Roda a BFS para cada vértice
-                #print(self.maxlevel)
-                if self.maxlevel > diameter: #Procura o maior nível dentre os vértices, que será o diâmetro
-                    diameter = self.maxlevel 
-        else: 
-            for i in range(1000):
-                vi = random.randint(1, self.v)
-                diameter = 0
-                self.BFS(vi) #Roda a BFS para 1000 vértices aleatórios
-                if self.maxlevel > diameter: #Procura o maior nível dentre os vértices, que será o diâmetro
-                    diameter = self.maxlevel
-        if p==1:
-            self.arquivo_saida.append(f'\nDiâmetro do grafo: {diameter}')
-        return diameter
-
-    
-    def cc(self,p):  #Retorna o número de componentes conexas, a maior componente e a menor
-        cc = [] #Lista das componentes conexas
-        vistos = np.zeros(self.v,dtype=int) #Array zerado para indicar se o vértice foi visto ou não
-        for vi in range(1,self.v +1):
-            if vistos[vi-1] == 0: 
-                marcados = [[],0]  #Retorna os vértices da componente e o tamanho dela
-                pais_vi = self.BFS(vi,0)[0] #Pega os pais de todos os vértices
-                for k in range(self.v): 
-                    if pais_vi[k] != -1: #Se o vértice tiver pai, ele está na componente conexa
-                        vistos[k] = 1 #Altera o vetor definindo que o vértice foi visto
-                        marcados[0].append(k+1) #Adiciona o vétice na lista de componentes conexas(índice é uma unidade menor que o vétice)
-                        marcados[1] += 1 #Atualiza o número total de componentes
-                cc.append(marcados[1]) #Adiciona as componentes à lista de componentes
-        fim = np.asarray(cc)
-        if p==1: 
-            self.arquivo_saida.append(f'\nNúmero de componentes conexas no grafo: {len(fim)}\nMaior componente conexa: {np.max(fim)}\nMenor componente conexa: {np.min(fim)}')
-        return cc   
 
     def Dijkstra(self,vi, p):
-        def Dijkstra(self,vi, p):
         if self.neg == True:
             print('not possble') 
             d = 'Não é possível'
         else:  
+            pai = np.array([-1] * self.v, dtype = int) #inicia vetor com os pais
+            nivel = np.array([-1] * self.v, dtype = int) #inicia vetor dos níveis
             S = np.zeros(self.v) #Definir S como vazio
             len_S = 0 #variável auxiliar para não ter que verificar a cada iteração a lista S
             dist = np.full(self.v, np.inf) #distâncias começam infinitas
             dist_aux = np.full(self.v, np.inf)
             dist_aux[vi-1]=0 
+            pai [vi-1] = 0
+            nivel [vi-1] = 0 
             while len_S != self.v : #Enquanto S != V
                 p_u = np.min(dist_aux) #Selecione u em V-S, tal que dist[u] é mínima
                 u = np.argmin(dist_aux) #u que tem a distância mínima
@@ -138,10 +104,12 @@ class Graph_l:
                     if S[v-1] ==0: 
                         if dist_aux[v-1] > dist[u] + self.lista[u][viz][1] :  #Se dist[v] > dist[u] + w(u,v) então
                             dist_aux[v-1] = dist[u] + self.lista[u][viz][1] #dist[v] = dist[u] + w(u,v)
-            return dist
+                            pai[v-1] = u+1
+                            nivel[v-1] = nivel[u] + 1
+            d = [dist, pai, nivel] 
             if p ==1: 
                 self.arquivo_saida.append(f'\nDijkstra: {d})
-            
+        return d    
 
 class Graph_m: #grafo em matriz 
     def __init__(self, v, a):
