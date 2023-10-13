@@ -12,15 +12,17 @@ class Graph_l:
         self.num_arestas = len(self.a) 
         self.neg = False
         self.lista = [[] for i in range(self.v)] #Não sabemos quantos elementos tem em cada linha (quantos vizinhos cada vértice tem)
+        self.pesos = [[] for i in range(self.v)]  #lista que contém apenas os pesos 
         g = np.zeros(self.v,dtype=int) #Vetor de zeros, onde vamos guardar o grau de cada vértice
         for i in range(self.num_arestas):
             u=self.a[i][0] #Pega o primeiro vértice do par de arestas
             v= self.a[i][1] #Pega o segundo vértice do par de arestas
             p= self.a[i][2] #Pega o peso da aresta
-            print(u,v)
-            if p < 0: self.neg == True
+            if p < 0: self.neg = True
             self.lista[u-1]+= [(v,p)] #Adiciona o vértice v na linha u (o índice é u-1, pois i se inicia no 0)
             self.lista[v-1]+= [(u, p)] #Adiciona o vértice u na linha v
+            self.pesos[u-1]+= [p]
+            self.pesos[v-1] += [p]
             g [u-1] += 1  #Atualiza os graus 
             g [v-1] += 1
         self.graus = g
@@ -166,23 +168,31 @@ class Graph_l:
         return cc   
 
     def Dijkstra(self,vi, p):
-        dist = np.full(self.v, np.inf)
-        if self.neg == True: 
+        def Dijkstra(self,vi, p):
+        if self.neg == True:
+            print('not possble') 
             d = 'Não é possível'
         else:  
-            S = [] #Definir S como vazio
+            S = np.zeros(self.v) #Definir S como vazio
             len_S = 0 #variável auxiliar para não ter que verificar a cada iteração a lista S
             dist = np.full(self.v, np.inf) #distâncias começam infinitas
-            dist[vi] = 0
+            dist_aux = np.full(self.v, np.inf)
+            dist_aux[vi-1]=0 
             while len_S != self.v : #Enquanto S != V
-                    #Selecione u em V-S, tal que dist[u] é mínima
-                    #Adicione u em S
-                    #Para cada vizinho v de u faça
-                    #Se dist[v] > dist[u] + w(u,v) então
-                        #dist[v] = dist[u] + w(u,v)
-            #Retorna dist[]
-        if p ==1: 
-            self.arquivo_saida.append(f'\nDijkstra: {d})
+                p_u = np.min(dist_aux) #Selecione u em V-S, tal que dist[u] é mínima
+                u = np.argmin(dist_aux) #u que tem a distância mínima
+                S[u]= 1 #Adicione u em S
+                len_S += 1 
+                dist[u]=dist_aux[u]
+                dist_aux[u]= np.inf  #usado para que não alteremos mais a distância de quem já foi adicionado a S
+                for viz in range(len(self.lista[u])): #Para cada vizinho de u faça
+                    v = self.lista[u][viz][0]
+                    if S[v-1] ==0: 
+                        if dist_aux[v-1] > dist[u] + self.lista[u][viz][1] :  #Se dist[v] > dist[u] + w(u,v) então
+                            dist_aux[v-1] = dist[u] + self.lista[u][viz][1] #dist[v] = dist[u] + w(u,v)
+            return dist
+            if p ==1: 
+                self.arquivo_saida.append(f'\nDijkstra: {d})
             
 
 class Graph_m: #grafo em matriz 
