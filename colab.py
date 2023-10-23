@@ -18,7 +18,7 @@ with open('rede_colaboracao.txt', 'r', encoding='utf-8') as arquivo:
 
 G = Graph_l(vertices, arestas)
 origem = 'Edsger W. Dijkstra'
-pesquisadores = ['Alan M. Turing', 'J. B. Kruskal', 'Jon M. Kleinberg', 'Daniel R. Figueiredo', 'Eva Tardos']
+pesquisadores = ['Alan M. Turing', 'J. B. Kruskal', 'Jon M. Kleinberg', 'Daniel R. Figueiredo', 'Éva Tardos']
 
 
 for i in range(len(pesquisadores)):
