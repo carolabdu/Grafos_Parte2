@@ -21,9 +21,21 @@ origem = 'Edsger W. Dijkstra'
 pesquisadores = ['Alan M. Turing', 'J. B. Kruskal', 'Jon M. Kleinberg', 'Daniel R. Figueiredo', 'Éva Tardos']
 
 
-for i in range(len(pesquisadores)):
-     G.distancia(dic[origem], dic[pesquisadores[i]], 1)
-    
+#for i in range(len(pesquisadores)):
+#     G.distancia(dic[origem], dic[pesquisadores[i]], 1)
+
+G.distancia(dic[origem], dic[pesquisadores[4]], 1) #rodar  
+'''
+Distância entre 2722 e 11365: inf
+
+Distância entre 2722 e 471365: 3.48036845488905
+
+Distância entre 2722 e 5709: 2.7069936175564644
+
+Distância entre 2722 e 343930: 2.9428308695367855
+
+'''
+
 
 '''
 
