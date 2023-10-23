@@ -59,8 +59,7 @@ class Graph_l:
                             nivel[v-1] = nivel[u] + 1 #atualiza o nível 
             d = [dist, pai, nivel] #retorna as distâncias, os pais e s níveis.
             if p ==1: 
-                print ('Distância sem heap: ', dist)
-                #print(f'\nDijkstra a partir de {v1} : {d[0]}, árvore (pais): {d[1]}, árvore(níveis): {d[2]} ')
+                print(f'\nDijkstra a partir de {v1} : {d[0]}, árvore (pais): {d[1]}, árvore(níveis): {d[2]} ')
         return d
     
     def DijkstraHeap(self, vi,p ) :
