@@ -13,3 +13,16 @@ Caminho entre  10 e 60: [10, 873980, 182382, 674971, 106317, 27985, 280367, 2273
 
 Grafo 5
 
+
+
+Rede de colaboração:
+Distância entre Edsger W. Dijkstra e Alan M. Turing: inf
+Caminho minimo entre Edsger W. Dijkstra e Alan M. Turing: Não há caminho, v2 e v1 não estão na mesma cc
+Distância entre Edsger W. Dijkstra e J. B. Kruskal: 3.48036845488905
+Caminho minimo entre Edsger W. Dijkstra e J. B. Kruskal: [2722, 9490, 7200, 10343, 646765, 490368, 10746, 3655, 471365]
+Distância entre Edsger W. Dijkstra e Jon M. Kleinberg: 2.7069936175564644
+Caminho minimo entre Edsger W. Dijkstra e Jon M. Kleinberg: [2722, 217250, 11456, 768, 11448, 101826, 12242, 11834, 9608, 5709]
+Distância entre Edsger W. Dijkstra e Daniel R. Figueiredo: 2.9428308695367855
+Caminho minimo entre Edsger W. Dijkstra e Daniel R. Figueiredo: [2722, 9490, 7200, 391667, 371226, 4379, 68773, 11466, 343930]
+Distância entre Edsger W. Dijkstra e Éva Tardos: 2.7535141793573357
+Caminho minimo entre Edsger W. Dijkstra e Éva Tardos: [2722, 217250, 11456, 768, 6479, 8528, 10572, 357587, 11649, 3694, 318911, 11386]
