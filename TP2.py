@@ -84,7 +84,6 @@ class Graph_l:
                 print ('Distância com heap: ', dist)
         return dist
     
-   
     def caminho(self,v1,v2,p): #v1 é o vértice de partida, v2 o de chegada e p é para imprimir 
         pais = self.Dijkstra(v2, 0)[1]  #fazemos a árvore a partir de v2, para ir encontrando os pais de v1 até chegar em v2
         caminho = [v1] #caminho começa já com o vétice de partida
@@ -98,9 +97,6 @@ class Graph_l:
         if p==1:
             print(f'\nCaminho entre  {v1} e {v2}: {caminho} ')
         return caminho 
-    
-    def mostra_dj (self,vi):
-        return self.Dijkstra(vi,0)
     
     def distancia(self, v1, v2, p): #Retorna a distâncoa entre dois vértices
         D= self.Dijkstra(v1, 0)[0][v2-1]
