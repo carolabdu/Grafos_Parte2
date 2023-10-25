@@ -69,11 +69,12 @@ class Graph_l:
                 print(f'\nDijkstra a partir de {v1} : {d} ')
         else:
             pais = np.array([-1] * self.v, dtype = int) #inicia vetor com os pais
+            pais[vi-1] = 0
             dist = np.full(self.v, np.inf) #define um vetor de custos/distancias e pais
             dist[vi-1] = 0 #define a distancia do primeiro vertice como 0 e pai vi
             h = [(0, vi)]   #pq - priority queue, adiciona o primeiro vértice no heap com distância 0
             while len(h) > 0:
-                dist_atual, u =  heapq.heappop(h) #pega o último valor da fila de prioridade(maior dist)
+                dist_atual, u =  heapq.heappop(h) #pega o último valor da fila de prioridade(menor dist)
                 for vizinhos in self.lista[u-1]:
                     viz = vizinhos[0]
                     peso = vizinhos[1]
@@ -81,10 +82,25 @@ class Graph_l:
                     if d < dist[viz-1]:
                         dist[viz-1] = d
                         heapq.heappush(h, (d, viz))
-                        pais[viz-1] = viz
+                        pais[viz-1] = u
             if p==1 : 
                 print ('Distância com heap: ', dist)
-        return dist
+        return (dist, pais)
+
+    def caminho_heap(self, v1, v2, p):
+        pais = self.DijkstraHeap(v2, 0)[1]  #fazemos a árvore a partir de v2, para ir encontrando os pais de v1 até chegar em v2
+        caminho = [v1] #caminho começa já com o vétice de partida
+        v= v1  #começamos em v1
+        if self.DijkstraHeap(v2, 0)[1][v1-1] == -1: 
+            caminho = "Não há caminho, v2 e v1 não estão na mesma cc"
+        else:
+            while v != v2: #enquanto vértice analisado não for vértice destino 
+                v = pais [v-1]  #próximo vértice do caminho é o pai do que último adicionado  
+                caminho.append(v)   #adicionamos esse pai ao caminho
+        if p==1:
+            print(f'\nCaminho entre  {v1} e {v2}: {caminho} ')
+        return caminho 
+    
     
     def caminho(self,v1,v2,p): #v1 é o vértice de partida, v2 o de chegada e p é para imprimir 
         pais = self.Dijkstra(v2, 0)[1]  #fazemos a árvore a partir de v2, para ir encontrando os pais de v1 até chegar em v2
