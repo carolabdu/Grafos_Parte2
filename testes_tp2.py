@@ -1,3 +1,5 @@
+#Código usado para fazer os estudos de caso
+
 from TP2 import *
 
 with open('grafo_W_4.txt', 'r') as arquivo:  #mudar o número do grafo de acordo com o teste 
