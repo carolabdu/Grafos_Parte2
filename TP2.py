@@ -74,7 +74,7 @@ class Graph_l:
             dist[vi-1] = 0 #define a distancia do primeiro vertice como 0 e pai vi
             h = [(0, vi)]   #pq - priority queue, adiciona o primeiro vértice no heap com distância 0
             while len(h) > 0:
-                dist_atual, u =  heapq.heappop(h) #pega o último valor da fila de prioridade(menor dist)
+                dist_atual, u =  heapq.heappop(h) #pega o primeiro valor da fila de prioridade(menor dist)
                 for vizinhos in self.lista[u-1]:
                     viz = vizinhos[0]
                     peso = vizinhos[1]
