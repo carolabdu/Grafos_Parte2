@@ -68,6 +68,7 @@ class Graph_l:
             if p ==1: 
                 print(f'\nDijkstra a partir de {v1} : {d} ')
         else:
+            pais = np.array([-1] * self.v, dtype = int) #inicia vetor com os pais
             dist = np.full(self.v, np.inf) #define um vetor de custos/distancias e pais
             dist[vi-1] = 0 #define a distancia do primeiro vertice como 0 e pai vi
             h = [(0, vi)]   #pq - priority queue, adiciona o primeiro vértice no heap com distância 0
@@ -80,6 +81,7 @@ class Graph_l:
                     if d < dist[viz-1]:
                         dist[viz-1] = d
                         heapq.heappush(h, (d, viz))
+                        pais[viz-1] = viz
             if p==1 : 
                 print ('Distância com heap: ', dist)
         return dist
